@@ -1,0 +1,1686 @@
+{
+  "info": {
+    "_postman_id": "01508c10-c86d-4d72-bb52-aa1d86079b7a",
+    "name": "XYZ Football API",
+    "description": "Complete API collection for XYZ Football API.\n\n**Quick Start:**\n1. Login with POST /login to get a JWT token.\n2. The token is auto-saved to the `token` variable.\n3. All protected endpoints use this token automatically.\n\n**Default Credentials:**\n- Username: admin\n- Password: password",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2622250"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "V1",
+          "item": [
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "if (jsonData.data && jsonData.data.token) {",
+                      "    pm.collectionVariables.set('token', jsonData.data.token);",
+                      "    console.log('Token saved!');",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/login",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Login - Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/login",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "login"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:40:04 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "312"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJkOTUyZmM5LThjMjgtNGUyYi04NzVkLTg0YjJjZTViMDg2NSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzE5MjI0MDQsImlhdCI6MTc3MTgzNjAwNH0.jWxhkBRIjn1ortZTY9CErN073ES_WSxlnuSeWm1ES00\",\n        \"role\": \"admin\"\n    }\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Teams",
+      "item": [
+        {
+          "name": "V1",
+          "item": [
+            {
+              "name": "Create Team",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "if (jsonData.data && jsonData.data.id) {",
+                      "    pm.collectionVariables.set('team_id', jsonData.data.id);",
+                      "    console.log('team_id saved: ' + jsonData.data.id);",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Persib Bandung",
+                      "type": "text"
+                    },
+                    {
+                      "key": "founded_year",
+                      "value": "1934",
+                      "type": "text"
+                    },
+                    {
+                      "key": "address",
+                      "value": "Jl. Sulanjana No.17, Bandung",
+                      "type": "text"
+                    },
+                    {
+                      "key": "city",
+                      "value": "Bandung",
+                      "type": "text"
+                    },
+                    {
+                      "key": "logo",
+                      "type": "file",
+                      "description": "Optional: attach a logo image file",
+                      "src": "/Users/lionair/Downloads/gopay.png"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/teams/",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "teams",
+                    ""
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Create Team - Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "name",
+                          "value": "Persib Bandung",
+                          "type": "text"
+                        },
+                        {
+                          "key": "founded_year",
+                          "value": "1933",
+                          "type": "text"
+                        },
+                        {
+                          "key": "address",
+                          "value": "Jl. Sulanjana No.17, Bandung",
+                          "type": "text"
+                        },
+                        {
+                          "key": "city",
+                          "value": "Bandung",
+                          "type": "text"
+                        },
+                        {
+                          "key": "logo",
+                          "type": "file",
+                          "description": "Optional: attach a logo image file",
+                          "src": "/Users/lionair/Downloads/gopay.png"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/teams/",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:40:21 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "385"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Team created successfully\",\n    \"data\": {\n        \"id\": \"d1ba6a19-1073-469f-9084-1da1bb89c778\",\n        \"name\": \"Persib Bandung\",\n        \"logo_url\": \"http://localhost:8080/uploads/team/logos/persib_bandung_1771836021.png\",\n        \"founded_year\": 1933,\n        \"address\": \"Jl. Sulanjana No.17, Bandung\",\n        \"city\": \"Bandung\",\n        \"created_at\": \"2026-02-23T08:40:21.789108471Z\",\n        \"updated_at\": \"2026-02-23T08:40:21.789108471Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Teams With Cursor",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/teams/?limit=15&cursor=&q=",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "teams",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "15",
+                      "description": "Max 50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "",
+                      "description": "Pagination cursor"
+                    },
+                    {
+                      "key": "q",
+                      "value": "",
+                      "description": "Search by team name"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get All Teams With Cursor - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/teams/?limit=15&cursor=&q=",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "15",
+                          "description": "Max 50"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": "",
+                          "description": "Pagination cursor"
+                        },
+                        {
+                          "key": "q",
+                          "value": "",
+                          "description": "Search by team name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:40:42 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "494"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": \"d1ba6a19-1073-469f-9084-1da1bb89c778\",\n            \"name\": \"Persib Bandung\",\n            \"logo_url\": \"http://localhost:8080/uploads/team/logos/persib_bandung_1771836021.png\",\n            \"founded_year\": 1933,\n            \"address\": \"Jl. Sulanjana No.17, Bandung\",\n            \"city\": \"Bandung\",\n            \"created_at\": \"2026-02-23T08:40:21.789108Z\",\n            \"updated_at\": \"2026-02-23T08:40:21.789108Z\"\n        }\n    ],\n    \"meta\": {\n        \"next_cursor\": \"MjAyNi0wMi0yM1QwODo0MDoyMS43ODkxMDhafGQxYmE2YTE5LTEwNzMtNDY5Zi05MDg0LTFkYTFiYjg5Yzc3OA==\",\n        \"has_more\": false\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Team by ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/teams/{{team_id}}",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "teams",
+                    "{{team_id}}"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get Team by ID - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/teams/{{team_id}}",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "{{team_id}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 07:33:22 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "361"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": \"ba255ed9-6093-4330-bd17-21197e14c225\",\n        \"name\": \"Persib Bandung\",\n        \"logo_url\": \"http://localhost:8080/uploads/team/logos/persib_bandung_1771831812.png\",\n        \"founded_year\": 1933,\n        \"address\": \"Jl. Sulanjana No.17, Bandung\",\n        \"city\": \"Bandung\",\n        \"created_at\": \"2026-02-23T07:30:12.524459Z\",\n        \"updated_at\": \"2026-02-23T07:30:12.524459Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Team",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Persib Bandung",
+                      "type": "text"
+                    },
+                    {
+                      "key": "founded_year",
+                      "value": "1933",
+                      "type": "text"
+                    },
+                    {
+                      "key": "address",
+                      "value": "Jl. Sulanjana No.17, Bandung",
+                      "type": "text"
+                    },
+                    {
+                      "key": "city",
+                      "value": "Bandung",
+                      "type": "text"
+                    },
+                    {
+                      "key": "logo",
+                      "type": "file",
+                      "value": ""
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/teams/{{team_id}}",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "teams",
+                    "{{team_id}}"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Update Team - Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "name",
+                          "value": "Persib Bandung",
+                          "type": "text"
+                        },
+                        {
+                          "key": "founded_year",
+                          "value": "1933",
+                          "type": "text"
+                        },
+                        {
+                          "key": "address",
+                          "value": "Jl. Sulanjana No.17, Bandung",
+                          "type": "text"
+                        },
+                        {
+                          "key": "city",
+                          "value": "Bandung",
+                          "type": "text"
+                        },
+                        {
+                          "key": "logo",
+                          "type": "file",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/teams/{{team_id}}",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "{{team_id}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:41:35 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "381"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Team updated successfully\",\n    \"data\": {\n        \"id\": \"d1ba6a19-1073-469f-9084-1da1bb89c778\",\n        \"name\": \"Persib Bandung\",\n        \"logo_url\": \"http://localhost:8080/uploads/team/logos/persib_bandung_1771836021.png\",\n        \"founded_year\": 1933,\n        \"address\": \"Jl. Sulanjana No.17, Bandung\",\n        \"city\": \"Bandung\",\n        \"created_at\": \"2026-02-23T08:40:21.789108Z\",\n        \"updated_at\": \"2026-02-23T08:41:35.99276498Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Team",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/teams/{{team_id}}",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "teams",
+                    "{{team_id}}"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Delete Team - Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/teams/{{team_id}}",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "{{team_id}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:42:56 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "54"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Team deleted successfully\"\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Players",
+      "item": [
+        {
+          "name": "V1",
+          "item": [
+            {
+              "name": "Create Player",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "if (jsonData.data && jsonData.data.id) {",
+                      "    pm.collectionVariables.set('player_id', jsonData.data.id);",
+                      "    console.log('player_id saved: ' + jsonData.data.id);",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"team_id\": \"{{team_id}}\",\n    \"name\": \"David Beckham\",\n    \"height_cm\": 183.50,\n    \"weight_kg\": 74.80,\n    \"position\": \"midfielder\",\n    \"jersey_number\": 7\n}"
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/players/",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "players",
+                    ""
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Create Player - Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"team_id\": \"{{team_id}}\",\n    \"name\": \"David Beckham\",\n    \"height_cm\": 183.50,\n    \"weight_kg\": 74.80,\n    \"position\": \"midfielder\",\n    \"jersey_number\": 7\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/players/",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "players",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:43:29 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "350"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Player created successfully\",\n    \"data\": {\n        \"id\": \"b51b61b3-7508-41df-8c34-d71ea819736a\",\n        \"team_id\": \"8eeefb69-6df5-4d1e-aae3-04f33f0ec20e\",\n        \"name\": \"David Beckham\",\n        \"height_cm\": 183.5,\n        \"weight_kg\": 74.8,\n        \"position\": \"midfielder\",\n        \"jersey_number\": 7,\n        \"created_at\": \"2026-02-23T08:43:28.995127048Z\",\n        \"updated_at\": \"2026-02-23T08:43:28.995127048Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Players With Cursor",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/players/?limit=15&cursor=&q=",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "players",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "15"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": ""
+                    },
+                    {
+                      "key": "q",
+                      "value": "",
+                      "description": "Search by player name"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get All Players With Cursor - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/players/?limit=15&cursor=&q=",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "players",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "15"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": ""
+                        },
+                        {
+                          "key": "q",
+                          "value": "",
+                          "description": "Search by player name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:43:41 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "457"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": \"b51b61b3-7508-41df-8c34-d71ea819736a\",\n            \"team_id\": \"8eeefb69-6df5-4d1e-aae3-04f33f0ec20e\",\n            \"name\": \"David Beckham\",\n            \"height_cm\": 183.5,\n            \"weight_kg\": 74.8,\n            \"position\": \"midfielder\",\n            \"jersey_number\": 7,\n            \"created_at\": \"2026-02-23T08:43:28.995127Z\",\n            \"updated_at\": \"2026-02-23T08:43:28.995127Z\"\n        }\n    ],\n    \"meta\": {\n        \"next_cursor\": \"MjAyNi0wMi0yM1QwODo0MzoyOC45OTUxMjdafGI1MWI2MWIzLTc1MDgtNDFkZi04YzM0LWQ3MWVhODE5NzM2YQ==\",\n        \"has_more\": false\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Player by ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/players/{{player_id}}",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "players",
+                    "{{player_id}}"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get Player by ID - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/players/{{player_id}}",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "players",
+                        "{{player_id}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:44:00 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "324"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": \"b51b61b3-7508-41df-8c34-d71ea819736a\",\n        \"team_id\": \"8eeefb69-6df5-4d1e-aae3-04f33f0ec20e\",\n        \"name\": \"David Beckham\",\n        \"height_cm\": 183.5,\n        \"weight_kg\": 74.8,\n        \"position\": \"midfielder\",\n        \"jersey_number\": 7,\n        \"created_at\": \"2026-02-23T08:43:28.995127Z\",\n        \"updated_at\": \"2026-02-23T08:43:28.995127Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Player",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"team_id\": \"{{team_id}}\",\n    \"name\": \"David Beckham\",\n    \"height_cm\": 183.50,\n    \"weight_kg\": 75.00,\n    \"position\": \"midfielder\",\n    \"jersey_number\": 7\n}"
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/players/{{player_id}}",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "players",
+                    "{{player_id}}"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Update Player - Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"team_id\": \"{{team_id}}\",\n    \"name\": \"David Beckham\",\n    \"height_cm\": 183.50,\n    \"weight_kg\": 75.00,\n    \"position\": \"midfielder\",\n    \"jersey_number\": 7\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/players/{{player_id}}",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "players",
+                        "{{player_id}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:44:17 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "345"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Player updated successfully\",\n    \"data\": {\n        \"id\": \"b51b61b3-7508-41df-8c34-d71ea819736a\",\n        \"team_id\": \"8eeefb69-6df5-4d1e-aae3-04f33f0ec20e\",\n        \"name\": \"David Beckham\",\n        \"height_cm\": 183.5,\n        \"weight_kg\": 75,\n        \"position\": \"midfielder\",\n        \"jersey_number\": 7,\n        \"created_at\": \"2026-02-23T08:43:28.995127Z\",\n        \"updated_at\": \"2026-02-23T08:44:17.601288257Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Player",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/players/{{player_id}}",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "players",
+                    "{{player_id}}"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Delete Player - Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/players/{{player_id}}",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "players",
+                        "{{player_id}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:44:31 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "56"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Player deleted successfully\"\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Matches",
+      "item": [
+        {
+          "name": "V1",
+          "item": [
+            {
+              "name": "Create Match",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "if (jsonData.data && jsonData.data.id) {",
+                      "    pm.collectionVariables.set('match_id', jsonData.data.id);",
+                      "    console.log('match_id saved: ' + jsonData.data.id);",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"home_team_id\": \"{{team_id}}\",\n    \"away_team_id\": \"4b867183-5f72-470b-9b3f-b12d508c95f0\",\n    \"match_date\": \"2026-03-15\",\n    \"match_time\": \"19:00:00\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/matches/",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "matches",
+                    ""
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Create Match - Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"home_team_id\": \"{{team_id}}\",\n    \"away_team_id\": \"4b867183-5f72-470b-9b3f-b12d508c95f0\",\n    \"match_date\": \"2026-03-15\",\n    \"match_time\": \"19:00:00\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/matches/",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "matches",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:46:10 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "440"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Match schedule created successfully\",\n    \"data\": {\n        \"id\": \"b2d41c50-f68d-43c7-8722-db1581f40324\",\n        \"home_team_id\": \"8eeefb69-6df5-4d1e-aae3-04f33f0ec20e\",\n        \"away_team_id\": \"4b867183-5f72-470b-9b3f-b12d508c95f0\",\n        \"match_date\": \"2026-03-15T00:00:00Z\",\n        \"match_time\": \"0000-01-01T19:00:00Z\",\n        \"home_score\": 0,\n        \"away_score\": 0,\n        \"status\": \"scheduled\",\n        \"created_at\": \"2026-02-23T08:46:10.536452303Z\",\n        \"updated_at\": \"2026-02-23T08:46:10.536452303Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Matches With Cursor",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/matches/?limit=15&cursor=&q=&status=",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "matches",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "15"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": ""
+                    },
+                    {
+                      "key": "q",
+                      "value": "",
+                      "description": "Search by team name"
+                    },
+                    {
+                      "key": "status",
+                      "value": "",
+                      "description": "Filter: scheduled, ongoing, finished, cancelled"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get All Matches With Cursor - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/matches/?limit=15&cursor=&q=&status=",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "matches",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "15"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": ""
+                        },
+                        {
+                          "key": "q",
+                          "value": "",
+                          "description": "Search by team name"
+                        },
+                        {
+                          "key": "status",
+                          "value": "",
+                          "description": "Filter: scheduled, ongoing, finished, cancelled"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 08:59:07 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "89"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Success\",\n    \"data\": [],\n    \"meta\": {\n        \"next_cursor\": \"\",\n        \"has_more\": false\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Match by ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/matches/{{match_id}}",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "matches",
+                    "{{match_id}}"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get Match by ID - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/matches/{{match_id}}",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "matches",
+                        "{{match_id}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 09:07:42 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "393"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": \"627280ad-6e93-4067-9091-ebccfc1c60c8\",\n        \"home_team_id\": \"67a09d6d-7ca6-4b7e-84de-3787bed2dbad\",\n        \"away_team_id\": \"436056ad-044d-4de7-acb0-70955b808887\",\n        \"match_date\": \"2026-03-15T00:00:00Z\",\n        \"match_time\": \"19:00:00\",\n        \"home_score\": 0,\n        \"away_score\": 0,\n        \"status\": \"finished\",\n        \"created_at\": \"2026-02-23T09:03:20.814225Z\",\n        \"updated_at\": \"2026-02-23T09:07:20.134084Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Change Match Status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"status\": \"ongoing\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/matches/{{match_id}}/status",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "matches",
+                    "{{match_id}}",
+                    "status"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Change Match Status - Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"status\": \"ongoing\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/matches/{{match_id}}/status",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "matches",
+                        "{{match_id}}",
+                        "status"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 09:07:20 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "422"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Match status updated successfully\",\n    \"data\": {\n        \"id\": \"627280ad-6e93-4067-9091-ebccfc1c60c8\",\n        \"home_team_id\": \"67a09d6d-7ca6-4b7e-84de-3787bed2dbad\",\n        \"away_team_id\": \"436056ad-044d-4de7-acb0-70955b808887\",\n        \"match_date\": \"2026-03-15T00:00:00Z\",\n        \"match_time\": \"19:00:00\",\n        \"home_score\": 0,\n        \"away_score\": 0,\n        \"status\": \"finished\",\n        \"created_at\": \"2026-02-23T09:03:20.814225Z\",\n        \"updated_at\": \"2026-02-23T09:07:20.134084989Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Report Match Score",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"home_score\": 2,\n    \"away_score\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/matches/{{match_id}}/score",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "matches",
+                    "{{match_id}}",
+                    "score"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Report Match Score - Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"home_score\": 2,\n    \"away_score\": 1\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/matches/{{match_id}}/score",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "matches",
+                        "{{match_id}}",
+                        "score"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 09:08:12 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "422"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Match score reported successfully\",\n    \"data\": {\n        \"id\": \"627280ad-6e93-4067-9091-ebccfc1c60c8\",\n        \"home_team_id\": \"67a09d6d-7ca6-4b7e-84de-3787bed2dbad\",\n        \"away_team_id\": \"436056ad-044d-4de7-acb0-70955b808887\",\n        \"match_date\": \"2026-03-15T00:00:00Z\",\n        \"match_time\": \"19:00:00\",\n        \"home_score\": 2,\n        \"away_score\": 1,\n        \"status\": \"finished\",\n        \"created_at\": \"2026-02-23T09:03:20.814225Z\",\n        \"updated_at\": \"2026-02-23T09:08:12.296783452Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Match",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/matches/{{match_id}}",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "matches",
+                    "{{match_id}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Match Events",
+      "item": [
+        {
+          "name": "V1",
+          "item": [
+            {
+              "name": "Add Match Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"player_id\": \"{{player_id}}\",\n    \"event_minute\": 45,\n    \"event_type\": \"goal\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url_v1}}/matches/{{match_id}}/events",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "matches",
+                    "{{match_id}}",
+                    "events"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Add Match Event - Validate Not Still Ongoing",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"player_id\": \"{{player_id}}\",\n    \"event_minute\": 45,\n    \"event_type\": \"goal\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/matches/{{match_id}}/events",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "matches",
+                        "{{match_id}}",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 09:03:35 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "197"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": false,\n    \"error_id\": 400,\n    \"message\": {\n        \"en\": \"cannot add event to match that is not ongoing or finished\",\n        \"id\": \"tidak bisa menambahkan event ke pertandingan yang belum berlangsung atau selesai\"\n    }\n}"
+                },
+                {
+                  "name": "Add Match Event - Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"player_id\": \"{{player_id}}\",\n    \"event_minute\": 45,\n    \"event_type\": \"goal\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url_v1}}/matches/{{match_id}}/events",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "matches",
+                        "{{match_id}}",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 09:09:06 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "392"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Match event added successfully\",\n    \"data\": {\n        \"id\": \"4a3168ab-20f1-48bd-9461-a5058b125563\",\n        \"match_id\": \"627280ad-6e93-4067-9091-ebccfc1c60c8\",\n        \"player_id\": \"320848fb-dcc9-4a54-ac29-47e901d69002\",\n        \"team_id\": \"67a09d6d-7ca6-4b7e-84de-3787bed2dbad\",\n        \"event_minute\": 45,\n        \"event_type\": \"goal\",\n        \"created_at\": \"2026-02-23T09:09:06.877897398Z\",\n        \"updated_at\": \"2026-02-23T09:09:06.877897398Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Match Events",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/matches/{{match_id}}/events",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "matches",
+                    "{{match_id}}",
+                    "events"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get Match Events - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/matches/{{match_id}}/events",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "matches",
+                        "{{match_id}}",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 09:09:53 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "365"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": \"4a3168ab-20f1-48bd-9461-a5058b125563\",\n            \"match_id\": \"627280ad-6e93-4067-9091-ebccfc1c60c8\",\n            \"player_id\": \"320848fb-dcc9-4a54-ac29-47e901d69002\",\n            \"team_id\": \"67a09d6d-7ca6-4b7e-84de-3787bed2dbad\",\n            \"event_minute\": 45,\n            \"event_type\": \"goal\",\n            \"created_at\": \"2026-02-23T09:09:06.877897Z\",\n            \"updated_at\": \"2026-02-23T09:09:06.877897Z\"\n        }\n    ]\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "V1",
+          "item": [
+            {
+              "name": "Get Match Reports (Standings)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url_v1}}/reports/matches?limit=15&page=1",
+                  "host": [
+                    "{{base_url_v1}}"
+                  ],
+                  "path": [
+                    "reports",
+                    "matches"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "15"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get Match Reports (Standings) - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_url_v1}}/reports/matches?limit=15&page=1",
+                      "host": [
+                        "{{base_url_v1}}"
+                      ],
+                      "path": [
+                        "reports",
+                        "matches"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "15"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 09:16:37 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "429"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Match reports fetched successfully\",\n    \"data\": [\n        {\n            \"match_id\": \"627280ad-6e93-4067-9091-ebccfc1c60c8\",\n            \"match_date\": \"2026-03-15\",\n            \"match_time\": \"19:00:00\",\n            \"home_team\": \"Persib Bandung\",\n            \"away_team\": \"Persija Jakarta\",\n            \"home_score\": 3,\n            \"away_score\": 1,\n            \"final_status\": \"Home Win\",\n            \"top_scorer\": \"David Beckham\",\n            \"home_team_total_wins\": 1,\n            \"away_team_total_wins\": 0\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 15,\n        \"total_data\": 1,\n        \"has_more\": false\n    }\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url_v1",
+      "value": "http://localhost:8080/api/v1"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "team_id",
+      "value": ""
+    },
+    {
+      "key": "player_id",
+      "value": ""
+    },
+    {
+      "key": "match_id",
+      "value": ""
+    }
+  ]
+}
